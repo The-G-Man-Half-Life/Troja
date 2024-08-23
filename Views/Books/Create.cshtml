@@ -1,0 +1,72 @@
+@model Troja.Models.Book
+
+@{
+    ViewData["Title"] = "Create Book";
+}
+
+<h1>Create Book</h1>
+
+<h4>Book</h4>
+<hr />
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Title" class="control-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AuthorId" class="control-label">Autor</label>
+        <select asp-for="AuthorId" class="form-control">
+            <option value="">Select Author</option>
+            @foreach (var author in ViewBag.Authors as List<SelectListItem>)
+            {
+                <option value="@author.Value">@author.Text</option>
+            }
+        </select>
+        <span asp-validation-for="AuthorId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LiteraryGenre" class="control-label"></label>
+        <input asp-for="LiteraryGenre" class="form-control" />
+        <span asp-validation-for="LiteraryGenre" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PublicationDate" class="control-label"></label>
+        <input asp-for="PublicationDate" class="form-control" type="date" />
+        <span asp-validation-for="PublicationDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ISBN" class="control-label"></label>
+        <input asp-for="ISBN" class="form-control" />
+        <span asp-validation-for="ISBN" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StatusValue" class="control-label"></label>
+        <select asp-for="StatusValue" class="form-control" >
+            <option value="">Select Status</option>
+            <option value="1">Available</option>
+            <option value="0">Unavailable</option>
+
+        </select>
+        <span asp-validation-for="StatusValue" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+
+<a class="btn btn-secondary" asp-action="Index">Back to List</a>
