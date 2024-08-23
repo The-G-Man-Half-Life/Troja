@@ -11,6 +11,12 @@
     <a class="btn btn-primary" asp-action="Create">Create New Book</a>
 </p>
 
+<form asp-asp-controller="="Books" asp-action="Index">
+    <input type="text" name="search" class="form-text" placeholder="search by title">
+    <input type="submit" value="Search" class="btn btn-sm btn-secondary">
+    <a href="@Url.Action("Index")" class="btn btn-sm btn-dark ml-2">Back</a>
+</form>
+
 @* Tabla libros *@
 <table class="table">
     <thead>
