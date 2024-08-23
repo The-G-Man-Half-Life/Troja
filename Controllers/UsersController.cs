@@ -25,7 +25,7 @@ namespace Troja.Controllers
             return View(_context.Users.ToList());
         }
 
-        // GET: Users/Details/5
+        // GET: Users/Details
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -62,6 +62,48 @@ namespace Troja.Controllers
             }
             else {
                 Console.Write("Error");
+            }
+            return View(user);
+        }
+
+         // GET: Users/Edit
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = _context.Users.Find(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        // POST: Users/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, [Bind("UserId,IdentificationType,IdentificationNumber,Name,LastName,Gender,BirthDate,Address,PhoneNumber")] User user)
+        {
+            if (id != user.UserId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(user);
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction(nameof(Index));
             }
             return View(user);
         }
