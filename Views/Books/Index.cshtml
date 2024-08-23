@@ -1,0 +1,53 @@
+@model IEnumerable<Troja.Models.Book>
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<h1>Books</h1>
+
+@* Botón para crear *@
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New Book</a>
+</p>
+
+@* Tabla libros *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Title)</th>
+            <th>@Html.DisplayNameFor(model => model.Author.AuthorName)</th>
+            <th>@Html.DisplayNameFor(model => model.PublicationDate)</th>
+            <th>@Html.DisplayNameFor(model => model.ISBN)</th>
+            <th>@Html.DisplayNameFor(model => model.StatusValue)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @* Iterador para mostrar los datos de cada libro *@
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+            <td>@Html.DisplayFor(modelItem => item.Author.AuthorName) @Html.DisplayFor(modelItem => item.Author.AuthorLastName) </td>
+            <td>@Html.DisplayFor(modelItem => item.PublicationDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.ISBN)</td>
+            <td>
+                @if (item.StatusValue == "1")
+                {
+                    <span class="badge badge-success">Available</span>
+                }
+                else
+                {
+                    <span class="badge badge-danger">Unavailable</span>
+                }
+            </td>
+            <td>
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.BookId">Details</a>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.BookId">Edit</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
