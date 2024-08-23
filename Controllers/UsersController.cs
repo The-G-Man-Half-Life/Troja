@@ -136,5 +136,10 @@ namespace Troja.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
+        private bool UserExists(int id)
+        {
+            return _context.Users.Any(e => e.UserId == id);
+        }
     }
 }
