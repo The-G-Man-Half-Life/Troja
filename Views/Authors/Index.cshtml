@@ -1,0 +1,47 @@
+@model IEnumerable<Troja.Models.Author>
+
+@{
+    ViewData["Title"] = "Authors Index";
+}
+
+<h1>Authors</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorLastName)
+            </th>
+            <th>Books</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorLastName)
+                </td>
+                <td>
+                    <a asp-action="BooksByAuthor" asp-route-authorId="@item.AuthorId" class="btn btn-info">View Books</a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.AuthorId" class="btn btn-success">Details</a>
+                    <a asp-action="Edit" asp-route-id="@item.AuthorId" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.AuthorId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
