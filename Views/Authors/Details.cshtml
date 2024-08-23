@@ -1,0 +1,22 @@
+@model Alejandria.Models.Author
+
+@{
+    ViewData["Title"] = "Author Details";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h4>Author</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Name</dt>
+        <dd class="col-sm-10">@Model.AuthorName</dd>
+        <dt class="col-sm-2">Last Name</dt>
+        <dd class="col-sm-10">@Model.AuthorLastName</dd>
+    </dl>
+</div>
+<p>
+    <a asp-controller="Authors" asp-action="Edit" asp-route-id="@Model.AuthorId" class="btn btn-warning">Edit</a>
+    <a asp-controller="Authors" asp-action="Index" class="btn btn-secondary">Back to List</a>
+</p>
