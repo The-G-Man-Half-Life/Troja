@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Authors Index";
+    // Recuperar el valor actual del filtro desde ViewData
+    var currentFilter = ViewData["CurrentFilter"] as string;
 }
 
 <h1>Authors</h1>
@@ -9,6 +11,14 @@
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
+
+<form asp-controller="Authors" asp-action="Index" method="get">
+    <p>
+        <input type="text" name="search" class="form-text" placeholder="Type author name or last name"value="@currentFilter" />
+        <input type="submit" value="Search" class="btn btn-sm btn-secondary" />
+        <a href="@Url.Action("Index")" class="btn btn-sm btn-dark ml-2">Back</a>
+    </p>
+</form>
 
 <table class="table">
     <thead>
