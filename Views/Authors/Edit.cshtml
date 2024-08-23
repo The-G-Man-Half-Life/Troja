@@ -1,0 +1,27 @@
+@model Alejandria.Models.Author
+
+@{
+    ViewData["Title"] = "Edit Author";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Author</h4>
+<hr />
+<form asp-action="Edit">
+    <input type="hidden" asp-for="AuthorId" />
+    <div class="form-group">
+        <label asp-for="AuthorName" class="control-label"></label>
+        <input asp-for="AuthorName" class="form-control" />
+        <span asp-validation-for="AuthorName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AuthorLastName" class="control-label"></label>
+        <input asp-for="AuthorLastName" class="form-control" />
+        <span asp-validation-for="AuthorLastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-controller="Authors" asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</form>
