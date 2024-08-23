@@ -12,7 +12,7 @@ namespace Troja.Controllers
     public class UsersController : Controller
     {
         //Creación el constructor de User con referencia al DbContext
-       private readonly AppDbContext _context;
+        private readonly AppDbContext _context;
 
         public UsersController(AppDbContext context)
         {
@@ -54,20 +54,25 @@ namespace Troja.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("IdentificationType,IdentificationNumber,Name,LastName,Gender,BirthDate,Address,PhoneNumber,Role")] User user)
         {
-            
+            if (user.Role != 0 && user.Role != 1)
+            {
+                return BadRequest("Invalid role specified.");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(user);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            else {
+            else
+            {
                 Console.Write("Error");
             }
             return View(user);
         }
 
-         // GET: Users/Edit
+        // GET: Users/Edit
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -91,6 +96,11 @@ namespace Troja.Controllers
             if (id != user.UserId)
             {
                 return NotFound();
+            }
+
+            if (user.Role != 0 && user.Role != 1)
+            {
+                return BadRequest("Invalid role specified.");
             }
 
             if (ModelState.IsValid)
