@@ -1,0 +1,41 @@
+@model Troja.Models.Loan
+
+@{
+    ViewData["Title"] = "Create Loan";
+}
+
+<h1>Create Loan</h1>
+
+<h4>Loan</h4>
+<hr />
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="UserId" class="control-label"></label>
+        @Html.DropDownListFor(model => model.UserId, (SelectList)ViewData["Users"], "Select User", new { @class = "form-control" })
+        <span asp-validation-for="UserId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BookId" class="control-label"></label>
+        @Html.DropDownListFor(model => model.BookId, (SelectList)ViewData["Books"], "Select Book", new { @class = "form-control" })
+        <span asp-validation-for="BookId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LoanDate" class="control-label"></label>
+        <input asp-for="LoanDate" class="form-control" type="date" />
+        <span asp-validation-for="LoanDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LimitDate" class="control-label"></label>
+        <input asp-for="LimitDate" class="form-control" type="date" />
+        <span asp-validation-for="LimitDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>

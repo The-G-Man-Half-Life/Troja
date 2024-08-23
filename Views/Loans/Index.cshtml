@@ -1,0 +1,61 @@
+@model IEnumerable<Troja.Models.Loan>
+
+@{
+    ViewData["Title"] = "Loans Index";
+}
+
+<h1>Loans</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().User.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Book.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().LoanDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().LimitDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().DevolutionDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => loan.User.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => loan.Book.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => loan.LoanDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => loan.LimitDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => loan.DevolutionDate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@loan.LoanId" class="btn btn-warning">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@loan.LoanId" class="btn btn-success">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@loan.LoanId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
