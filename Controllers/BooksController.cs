@@ -18,15 +18,23 @@ namespace Troja.Controllers
         }
 
         // GET: Books
-        public async Task<IActionResult> Index(string search)
+        public async Task<IActionResult> Index(string titleSearch, string statusSearch)
         {
             var books = _context.Books.Include(b => b.Author).AsQueryable();
 
-            if (!string.IsNullOrEmpty(search))
+            if (!string.IsNullOrEmpty(titleSearch))
             {
-                var searchLower = search.ToLower();
-                books = books.Where(b => b.Title.ToLower().Contains(searchLower));
+                var titleSearchLower = titleSearch.ToLower();
+                books = books.Where(b => b.Title.ToLower().Contains(titleSearchLower));
             }
+
+            if (!string.IsNullOrEmpty(statusSearch))
+            {
+                books = books.Where(b => b.StatusValue == statusSearch);
+            }
+
+            ViewData["CurrentTitleFilter"] = titleSearch;
+            ViewData["CurrentStatusFilter"] = statusSearch;
 
             return View(await books.ToListAsync());
         }
