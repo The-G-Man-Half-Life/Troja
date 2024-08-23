@@ -1,0 +1,56 @@
+@model Troja.Models.Author
+
+@{
+    ViewData["Title"] = "Books by Author";
+}
+
+<h1>Books by @Model.AuthorName @Model.AuthorLastName</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Books.FirstOrDefault().Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books.FirstOrDefault().ISBN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books.FirstOrDefault().PublicationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books.FirstOrDefault().StatusValue)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model.Books)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => book.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => book.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => book.PublicationDate)
+                </td>
+                <td>
+                @if (book.StatusValue == "1")
+                {
+                    <span class="badge badge-success">Available</span>
+                }
+                else
+                {
+                    <span class="badge badge-danger">Unavailable</span>
+                }
+            </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Back to Authors List</a>
+</div>
