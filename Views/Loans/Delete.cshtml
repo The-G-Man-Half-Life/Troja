@@ -1,0 +1,51 @@
+@model Troja.Models.Loan
+
+@{
+    ViewData["Title"] = "Delete Loan";
+}
+
+<h1>Delete Loan</h1>
+
+<h4>Loan</h4>
+<hr />
+
+<div>
+    <h4>Are you sure you want to delete this loan?</h4>
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.User.Name)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.User.Name)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Book.Title)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Book.Title)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.LoanDate)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.LoanDate)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.LimitDate)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.LimitDate)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.DevolutionDate)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.DevolutionDate)
+        </dd>
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="LoanId" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

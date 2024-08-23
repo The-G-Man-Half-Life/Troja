@@ -1,0 +1,45 @@
+@model Troja.Models.Loan
+
+@{
+    ViewData["Title"] = "Loan Details";
+}
+
+<h1>Loan Details</h1>
+
+<div>
+    <h4>Loan</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.User.Name)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.User.Name)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Book.Title)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Book.Title)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.LoanDate)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.LoanDate)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.LimitDate)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.LimitDate)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.DevolutionDate)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.DevolutionDate)
+        </dd>
+    </dl>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
