@@ -19,6 +19,10 @@ namespace Troja.Controllers
             _context = context;
         }
 
-
+        // GET: User
+        public IActionResult Index()
+        {
+            return View(_context.Users.ToList());
+        }
     }
 }
