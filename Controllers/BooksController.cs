@@ -18,13 +18,28 @@ namespace Troja.Controllers
         }
 
         // GET: Books
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string titleSearch, string statusSearch)
         {
-            var books = await _context.Books.Include(b => b.Author).ToListAsync();
-            return View(books);
+            var books = _context.Books.Include(b => b.Author).AsQueryable();
+
+            if (!string.IsNullOrEmpty(titleSearch))
+            {
+                var titleSearchLower = titleSearch.ToLower();
+                books = books.Where(b => b.Title.ToLower().Contains(titleSearchLower));
+            }
+
+            if (!string.IsNullOrEmpty(statusSearch))
+            {
+                books = books.Where(b => b.StatusValue == statusSearch);
+            }
+
+            ViewData["CurrentTitleFilter"] = titleSearch;
+            ViewData["CurrentStatusFilter"] = statusSearch;
+
+            return View(await books.ToListAsync());
         }
 
-        // GET: Books/Details/5
+        // GET: Books/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -83,7 +98,7 @@ namespace Troja.Controllers
             return View(book);
         }
 
-        // GET: Books/Edit/5
+        // GET: Books/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -101,7 +116,7 @@ namespace Troja.Controllers
             return View(book);
         }
 
-        // POST: Books/Edit/5
+        // POST: Books/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BookId,Title,AuthorId,LiteraryGenre,PublicationDate,ISBN,StatusValue")] Book book)
@@ -136,7 +151,7 @@ namespace Troja.Controllers
             return View(book);
         }
 
-        // GET: Books/Delete/5
+        // GET: Books/Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -156,7 +171,7 @@ namespace Troja.Controllers
             return View(book);
         }
 
-        // POST: Books/Delete/5
+        // POST: Books/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

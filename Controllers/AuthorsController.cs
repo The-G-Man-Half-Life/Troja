@@ -17,10 +17,22 @@ namespace Troja.Controllers
         }
 
         // GET: Authors
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search)
         {
-            var authors = await _context.Authors.ToListAsync();
-            return View(authors);
+            ViewData["CurrentFilter"] = search;
+
+            var authors = _context.Authors.AsQueryable();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                // Convertir ambos lados de la comparación a minúsculas
+                var searchLower = search.ToLower();
+
+                authors = authors.Where(a => a.AuthorName.ToLower().Contains(searchLower) || a.AuthorLastName.ToLower().Contains(searchLower));
+
+            }
+
+            return View(await authors.ToListAsync());
         }
 
         // GET: Authors/Details
