@@ -24,5 +24,23 @@ namespace Troja.Controllers
         {
             return View(_context.Users.ToList());
         }
+
+        // GET: Users/Details/5
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = _context.Users
+                .FirstOrDefault(m => m.UserId == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
     }
 }
