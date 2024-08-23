@@ -1,0 +1,58 @@
+@model Troja.Models.Book
+
+@{
+    ViewData["Title"] = "Edit Book";
+}
+
+<h1>Edit Book</h1>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="BookId" />
+    
+    <div class="form-group">
+        <label asp-for="Title" class="control-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AuthorId" class="control-label"></label>
+        <select asp-for="AuthorId" class="form-control" asp-items="ViewBag.Authors"></select>
+        <span asp-validation-for="AuthorId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LiteraryGenre" class="control-label"></label>
+        <input asp-for="LiteraryGenre" class="form-control" />
+        <span asp-validation-for="LiteraryGenre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PublicationDate" class="control-label"></label>
+        <input asp-for="PublicationDate" class="form-control" type="date" />
+        <span asp-validation-for="PublicationDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ISBN" class="control-label"></label>
+        <input asp-for="ISBN" class="form-control" />
+        <span asp-validation-for="ISBN" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StatusValue" class="control-label"></label>
+         <select asp-for="StatusValue" class="form-control" >
+            <option value="">Select Status</option>
+            <option value="1">Available</option>
+            <option value="0">Unavailable</option>
+        </select>
+        <span asp-validation-for="StatusValue" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
