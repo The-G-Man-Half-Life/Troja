@@ -1,0 +1,93 @@
+@page
+@model Troja.Views.Users.Create
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="IdentificationType" class="control-label">Identification Type</label>
+        <select asp-for="IdentificationType" class="form-control">
+            <option value="">Select an identification type</option>
+            <option value="DriverLicense">Driver's License</option>
+            <option value="Passport">Passport</option>
+            <option value="ID">ID</option>
+            <option value="Visa">Visa</option>
+        </select>
+
+        <span asp-validation-for="IdentificationType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IdentificationNumber" class="control-label"></label>
+        <input asp-for="IdentificationNumber" class="form-control" />
+        <span asp-validation-for="IdentificationNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName" class="control-label"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Gender" class="control-label"></label>
+        <select asp-for="Gender" class="form-control" >
+            <option value="">Select a Gender</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+
+        </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BirthDate" class="control-label"></label>
+        <input asp-for="BirthDate" class="form-control" type="date" />
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address" class="control-label"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber" class="control-label"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Role" class="control-label">Role</label>
+        <select asp-for="Role" class="form-control">
+            <option value="">Select a Role</option>
+            <option value="0">User</option>
+            <option value="1">Admin</option>
+        </select>
+
+        <span asp-validation-for="Role" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
