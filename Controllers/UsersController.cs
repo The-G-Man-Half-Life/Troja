@@ -52,8 +52,9 @@ namespace Troja.Controllers
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("IdentificationType,IdentificationNumber,Name,LastName,Gender,BirthDate,Address,PhoneNumber")] User user)
+        public IActionResult Create([Bind("IdentificationType,IdentificationNumber,Name,LastName,Gender,BirthDate,Address,PhoneNumber,Role")] User user)
         {
+            
             if (ModelState.IsValid)
             {
                 _context.Add(user);
@@ -85,7 +86,7 @@ namespace Troja.Controllers
         // POST: Users/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("UserId,IdentificationType,IdentificationNumber,Name,LastName,Gender,BirthDate,Address,PhoneNumber")] User user)
+        public IActionResult Edit(int id, [Bind("UserId,IdentificationType,IdentificationNumber,Name,LastName,Gender,BirthDate,Address,PhoneNumber,Role")] User user)
         {
             if (id != user.UserId)
             {
