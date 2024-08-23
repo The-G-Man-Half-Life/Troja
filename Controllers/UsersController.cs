@@ -9,17 +9,16 @@ using Microsoft.Extensions.Logging;
 namespace Troja.Controllers
 {
     [Route("[controller]")]
-    public class UserController : Controller
+    public class UsersController : Controller
     {
-        //Acción para mostrar el formulario de creación (GET)
+        //Creación el constructor de User con referencia al DbContext
+       private readonly AppDbContext _context;
 
-        [HttpGet]
-
-        public IActionResult Create()
+        public UsersController(AppDbContext context)
         {
-            return View();
+            _context = context;
         }
 
-        
+
     }
 }
