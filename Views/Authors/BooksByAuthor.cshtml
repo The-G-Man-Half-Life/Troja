@@ -37,15 +37,15 @@
                     @Html.DisplayFor(model => book.PublicationDate)
                 </td>
                 <td>
-                @if (book.StatusValue == "1")
-                {
-                    <span class="badge badge-success">Available</span>
-                }
-                else
-                {
-                    <span class="badge badge-danger">Unavailable</span>
-                }
-            </td>
+                    @if (book.StatusValue == "1")
+                    {
+                        <span class="badge badge-success">Available</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger">Unavailable</span>
+                    }
+                </td>
             </tr>
         }
     </tbody>
