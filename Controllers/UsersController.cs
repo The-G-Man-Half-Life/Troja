@@ -42,5 +42,28 @@ namespace Troja.Controllers
 
             return View(user);
         }
+
+        // GET: Users/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Users/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([Bind("IdentificationType,IdentificationNumber,Name,LastName,Gender,BirthDate,Address,PhoneNumber")] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(user);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            else {
+                Console.Write("Error");
+            }
+            return View(user);
+        }
     }
 }
