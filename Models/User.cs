@@ -15,6 +15,7 @@ public class User
     public DateOnly BirthDate { get; set; }
     public string Address { get; set; }
     public string PhoneNumber { get; set; }
+    public int Role { get; set; }
     public string FullName => $"{Name} {LastName}";  // Propiedad calculada
 
     // Propiedad de navegación para los préstamos
